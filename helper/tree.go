@@ -1,15 +1,15 @@
 package helper
 
 type Tree struct {
-	root *Node
+	Root *Node
 }
 
-func (tree *Tree) insert(data int) *Tree {
+func (tree *Tree) Insert(data int) *Tree {
 	newNode := &Node{data: data, left: nil, right: nil}
-	if tree.root != nil {
-		tree.root.insert(newNode)
+	if tree.Root != nil {
+		tree.Root.insert(newNode)
 	} else {
-		tree.root = newNode
+		tree.Root = newNode
 	}
 	return tree
 }

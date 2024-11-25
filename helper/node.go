@@ -17,3 +17,14 @@ func (node *Node) insert(newNode *Node) {
 		node.right = newNode
 	}
 }
+
+func (node *Node) walk() []int {
+	result := make([]int, 0)
+	for node := node.left; node.left != nil; node = node.left {
+	}
+	result = append(result, node.data)
+	if node.right != nil {
+		result = append(result, node.right.walk()...)
+	}
+	return result
+}

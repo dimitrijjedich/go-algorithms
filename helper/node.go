@@ -7,7 +7,7 @@ type Node struct {
 }
 
 func (node *Node) insert(newNode *Node) {
-	if node.left == nil {
+	if newNode.data < node.data && node.left == nil {
 		node.left = newNode
 	} else if newNode.data < node.data {
 		node.left.insert(newNode)

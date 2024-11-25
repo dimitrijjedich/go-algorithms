@@ -7,14 +7,14 @@ type Node struct {
 }
 
 func (node *Node) insert(newNode *Node) {
-	if node.left != nil && newNode.data < node.data {
-		node.left.insert(newNode)
-	} else if newNode.data < node.data {
+	if node.left == nil {
 		node.left = newNode
-	} else if node.left != nil && newNode.data > node.data {
-		node.right.insert(newNode)
-	} else {
+	} else if newNode.data < node.data {
+		node.left.insert(newNode)
+	} else if node.right == nil {
 		node.right = newNode
+	} else {
+		node.right.insert(newNode)
 	}
 }
 

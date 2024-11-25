@@ -20,11 +20,17 @@ func (node *Node) insert(newNode *Node) {
 
 func (node *Node) Walk() []int {
 	result := make([]int, 0)
-	for node := node.left; node.left != nil; node = node.left {
-	}
 	result = append(result, node.data)
-	if node.right != nil {
-		result = append(result, node.right.Walk()...)
+	println(node.data)
+	if node.left == nil {
+		if node.right != nil {
+			result = append(result, node.right.Walk()...)
+		}
+	} else {
+		result = append(node.left.Walk(), result...)
+		if node.right != nil {
+			result = append(result, node.right.Walk()...)
+		}
 	}
 	return result
 }

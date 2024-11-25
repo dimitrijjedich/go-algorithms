@@ -4,7 +4,7 @@ type Tree struct {
 	root *Node
 }
 
-func (tree *Tree) add(data int) *Tree {
+func (tree *Tree) insert(data int) *Tree {
 	newNode := &Node{data: data, left: nil, right: nil}
 	if tree.root != nil {
 		tree.root.insert(newNode)

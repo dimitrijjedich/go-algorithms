@@ -21,7 +21,6 @@ func (node *Node) insert(newNode *Node) {
 func (node *Node) Walk() []int {
 	result := make([]int, 0)
 	result = append(result, node.data)
-	println(node.data)
 	if node.left == nil {
 		if node.right != nil {
 			result = append(result, node.right.Walk()...)

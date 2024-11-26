@@ -10,6 +10,8 @@ func BinaryTreeSort(arr []int) []int {
 	for i := 0; i < len(arr); i++ {
 		tree.Insert(arr[i])
 	}
-	result = tree.Root.Walk()
+	if tree.Root != nil {
+		result = tree.Root.Walk()
+	}
 	return result
 }

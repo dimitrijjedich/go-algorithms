@@ -9,5 +9,19 @@ func MergeSort(arr []int) []int {
 
 	left := MergeSort(arr[:center])
 	right := MergeSort(arr[0:center])
+
+	nLeft := len(left)
+	nRight := len(right)
+	i, j := 0, 0
+	result := make([]int, 0)
+	for i < nLeft && j < nRight {
+		if left[i] < right[j] {
+			result = appen(result, left[i])
+			i++
+		} else {
+			result = appen(result, right[j])
+			j++
+		}
+	}
 	return arr
 }

@@ -16,10 +16,10 @@ func MergeSort(arr []int) []int {
 	result := make([]int, 0)
 	for i < nLeft && j < nRight {
 		if left[i] < right[j] {
-			result = appen(result, left[i])
+			result = append(result, left[i])
 			i++
 		} else {
-			result = appen(result, right[j])
+			result = append(result, right[j])
 			j++
 		}
 	}

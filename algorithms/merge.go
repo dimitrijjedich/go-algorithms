@@ -8,7 +8,7 @@ func MergeSort(arr []int) []int {
 	center := n / 2
 
 	left := MergeSort(arr[:center])
-	right := MergeSort(arr[0:center])
+	right := MergeSort(arr[center:])
 
 	nLeft := len(left)
 	nRight := len(right)

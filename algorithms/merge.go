@@ -22,6 +22,12 @@ func MergeSort(arr []int) []int {
 			result = append(result, right[j])
 			j++
 		}
+		for ; i < nLeft; i++ {
+			result = append(result, left[i])
+		}
+		for ; j < nRight; j++ {
+			result = append(result, right[j])
+		}
 	}
 	return result
 }

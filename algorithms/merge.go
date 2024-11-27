@@ -23,5 +23,5 @@ func MergeSort(arr []int) []int {
 			j++
 		}
 	}
-	return arr
+	return result
 }

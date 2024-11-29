@@ -15,7 +15,7 @@ func RadixSort(arr []int) []int {
 			return partitions[0]
 		}
 		for i := 0; i < n; i++ {
-			partition := (result[i] / divider) % divider
+			partition := (result[i] / (divider / 10)) % divider
 			partitions[partition] = append(partitions[partition], result[i])
 		}
 		result = make([]int, 0)

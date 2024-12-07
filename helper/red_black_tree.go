@@ -52,4 +52,9 @@ func (tree *RedBlackTree) Insert(value int) {
 	if newNode.parent.color == Black {
 		return
 	}
+	if newNode.parent.parent != nil && newNode.parent.color == Red && (newNode.uncle() == nil || newNode.uncle().color == Red) {
+		newNode.parent.color = Black
+		newNode.uncle().color = Black
+		newNode.parent.parent.color = Red
+	}
 }

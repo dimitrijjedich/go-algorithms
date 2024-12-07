@@ -23,6 +23,7 @@ func (tree *RedBlackTree) Insert(value int) {
 	newNode := &RedBlackNode{value: value, color: Red, parent: nil, left: nil, right: nil}
 	if tree.root == nil {
 		tree.root = newNode
+		tree.root.color = Black
 		return
 	}
 	pointer := tree.root

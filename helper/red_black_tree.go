@@ -90,3 +90,13 @@ func (tree *RedBlackTree) Insert(value int) {
 		return
 	}
 }
+
+func (node *RedBlackNode) Walk() []int {
+	result := make([]int, 0)
+	if node == nil {
+		return result
+	}
+	result = append(node.left.Walk(), node.value)
+	result = append(result, node.right.Walk()...)
+	return result
+}

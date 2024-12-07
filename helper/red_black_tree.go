@@ -81,5 +81,6 @@ func (tree *RedBlackTree) Insert(value int) {
 		}
 		parent.color = Black
 		grandparent.color = Red
+		return
 	}
 }

@@ -24,17 +24,17 @@ func (node *RedBlackNode) uncle() *RedBlackNode {
 }
 
 type RedBlackTree struct {
-	root *RedBlackNode
+	Root *RedBlackNode
 }
 
 func (tree *RedBlackTree) Insert(value int) {
 	newNode := &RedBlackNode{value: value, color: Red, parent: nil, left: nil, right: nil}
-	if tree.root == nil {
-		tree.root = newNode
-		tree.root.color = Black
+	if tree.Root == nil {
+		tree.Root = newNode
+		tree.Root.color = Black
 		return
 	}
-	pointer := tree.root
+	pointer := tree.Root
 	for {
 		if newNode.value < pointer.value && pointer.left != nil {
 			pointer = pointer.left
@@ -60,8 +60,8 @@ func (tree *RedBlackTree) Insert(value int) {
 	grandparent := newNode.parent.parent
 	parent := newNode.parent
 	if (newNode.uncle() == nil || newNode.uncle().color == Black) && parent.color == Red {
-		if grandparent == tree.root {
-			tree.root = parent
+		if grandparent == tree.Root {
+			tree.Root = parent
 			parent.right = grandparent
 			parent.parent = nil
 			grandparent.parent = parent
@@ -83,7 +83,7 @@ func (tree *RedBlackTree) Insert(value int) {
 		grandparent.color = Red
 		return
 	}
-	if newNode.parent.color == Red && newNode.parent == tree.root {
+	if newNode.parent.color == Red && newNode.parent == tree.Root {
 		newNode.parent.color = Black
 		return
 	}

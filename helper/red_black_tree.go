@@ -44,7 +44,7 @@ func (tree *RedBlackTree) Insert(value int) {
 		} else if pointer.right != nil {
 			pointer = pointer.right
 		} else {
-			pointer.right.left = newNode
+			pointer.right = newNode
 			break
 		}
 	}

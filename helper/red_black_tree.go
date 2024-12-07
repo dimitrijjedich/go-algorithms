@@ -14,3 +14,7 @@ type RedBlackNode struct {
 	left   *RedBlackNode
 	right  *RedBlackNode
 }
+
+type RedBlackTree struct {
+	root *RedBlackNode
+}

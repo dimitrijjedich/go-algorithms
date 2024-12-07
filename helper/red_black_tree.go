@@ -57,4 +57,33 @@ func (tree *RedBlackTree) Insert(value int) {
 		newNode.uncle().color = Black
 		newNode.parent.parent.color = Red
 	}
+	grandparent := newNode.parent.parent
+	parent := newNode.parent
+	if (newNode.uncle() == nil || newNode.uncle().color == Black) && parent.color == Red {
+		if grandparent == tree.root {
+			tree.root = parent
+			parent.right = grandparent
+			parent.parent = nil
+			grandparent.parent = parent
+			parent.color = Black
+			grandparent.color = Red
+		}
+		if (parent.left == newNode && grandparent.left == parent) || (parent.right == newNode || parent == grandparent.right) {
+			if grandparent.parent.right == grandparent {
+				parent.parent = grandparent.parent
+				parent.parent.right = parent
+				grandparent.parent = parent
+				grandparent.right = parent.right
+				parent.right = nil
+			} else {
+				parent.parent = grandparent.parent
+				parent.parent.left = parent
+				grandparent.parent = parent
+				grandparent.left = parent.left
+				parent.left = nil
+			}
+			parent.color = Black
+			grandparent.color = Red
+		}
+	}
 }

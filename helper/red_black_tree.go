@@ -65,8 +65,6 @@ func (tree *RedBlackTree) Insert(value int) {
 			parent.right = grandparent
 			parent.parent = nil
 			grandparent.parent = parent
-			parent.color = Black
-			grandparent.color = Red
 		}
 		if (parent.left == newNode && grandparent.left == parent) || (parent.right == newNode || parent == grandparent.right) {
 			if grandparent.parent.right == grandparent {
@@ -82,8 +80,8 @@ func (tree *RedBlackTree) Insert(value int) {
 				grandparent.left = parent.left
 				parent.left = nil
 			}
-			parent.color = Black
-			grandparent.color = Red
 		}
+		parent.color = Black
+		grandparent.color = Red
 	}
 }

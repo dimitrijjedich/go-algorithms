@@ -67,16 +67,14 @@ func (tree *RedBlackTree) Insert(value int) {
 			grandparent.parent = parent
 		}
 		if (parent.left == newNode && grandparent.left == parent) || (parent.right == newNode || parent == grandparent.right) {
-			if grandparent.parent.right == grandparent {
-				parent.parent = grandparent.parent
+			parent.parent = grandparent.parent
+			grandparent.parent = parent
+			if parent.parent.right == grandparent {
 				parent.parent.right = parent
-				grandparent.parent = parent
 				grandparent.right = parent.right
 				parent.right = nil
 			} else {
-				parent.parent = grandparent.parent
 				parent.parent.left = parent
-				grandparent.parent = parent
 				grandparent.left = parent.left
 				parent.left = nil
 			}

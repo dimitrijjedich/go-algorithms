@@ -49,4 +49,7 @@ func (tree *RedBlackTree) Insert(value int) {
 		}
 	}
 	newNode.parent = pointer
+	if newNode.parent.color == Black {
+		return
+	}
 }

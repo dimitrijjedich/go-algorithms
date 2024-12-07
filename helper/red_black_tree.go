@@ -15,6 +15,14 @@ type RedBlackNode struct {
 	right  *RedBlackNode
 }
 
+func (node *RedBlackNode) uncle() *RedBlackNode {
+	parent := node.parent
+	if parent.left == node {
+		return parent.right
+	}
+	return parent.left
+}
+
 type RedBlackTree struct {
 	root *RedBlackNode
 }

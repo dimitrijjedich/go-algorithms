@@ -16,11 +16,13 @@ type RedBlackNode struct {
 }
 
 func (node *RedBlackNode) uncle() *RedBlackNode {
-	parent := node.parent
-	if parent.parent.left == parent {
-		return parent.parent.right
+	if node.parent == nil || node.parent.parent == nil {
+		return nil
 	}
-	return parent.parent.left
+	if node.parent.parent.left == node.parent {
+		return node.parent.parent.right
+	}
+	return node.parent.parent.left
 }
 
 type RedBlackTree struct {

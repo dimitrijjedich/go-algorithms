@@ -44,6 +44,17 @@ func (node *RedBlackNode) sibling() *RedBlackNode {
 	return node.parent.left
 }
 
+func (node *RedBlackNode) recolor() {
+	// if node is red ...
+	if node.color == Red {
+		// ... change color to black
+		node.color = Black
+	} else {
+		// ... otherwise change color to red
+		node.color = Red
+	}
+}
+
 type RedBlackTree struct {
 	Root *RedBlackNode
 }

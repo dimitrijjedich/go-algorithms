@@ -30,6 +30,20 @@ func (node *RedBlackNode) uncle() *RedBlackNode {
 	return node.parent.parent.left
 }
 
+func (node *RedBlackNode) sibling() *RedBlackNode {
+	// the node has no parent -> there will be no sibling
+	if node.parent == nil {
+		return nil
+	}
+	// the parent left child is the node
+	if node.parent.left == node {
+		// the sibling is the right child
+		return node.parent.right
+	}
+	// the parent left child is not the node therefore it must be the sibling
+	return node.parent.left
+}
+
 type RedBlackTree struct {
 	Root *RedBlackNode
 }

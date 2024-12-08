@@ -30,10 +30,17 @@ type RedBlackTree struct {
 }
 
 func (tree *RedBlackTree) Insert(value int) {
+	// create a new RedBlackNode with the provided value
+	// initiate the node as Red with no parents and no children
 	newNode := &RedBlackNode{value: value, color: Red, parent: nil, left: nil, right: nil}
+
+	// if the root of the tree is empty (nil)
 	if tree.Root == nil {
+		// make the new node the new root of the tree, ...
 		tree.Root = newNode
+		// ...recolor the node to Black (root is always black)...
 		tree.Root.color = Black
+		// ...and finish the process
 		return
 	}
 

@@ -34,6 +34,7 @@ func (tree *RedBlackTree) Insert(value int) {
 		tree.Root.color = Black
 		return
 	}
+
 	pointer := tree.Root
 	for {
 		if newNode.value < pointer.value && pointer.left != nil {

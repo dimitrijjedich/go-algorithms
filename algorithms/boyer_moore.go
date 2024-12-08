@@ -26,11 +26,8 @@ func Search(needle []rune, haystack []rune) int {
 func skipTable(needle []rune) map[rune]int {
 	result := make(map[rune]int)
 	n := len(needle)
-	for i := n - 1; i >= 0; i-- {
-		_, exists := result[needle[i]]
-		if !exists {
-			result[needle[i]] = n - 1 - i
-		}
+	for i := 0; i < n; i++ {
+		result[needle[i]] = n - 1 - i
 	}
 	return result
 }

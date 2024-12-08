@@ -16,12 +16,17 @@ type RedBlackNode struct {
 }
 
 func (node *RedBlackNode) uncle() *RedBlackNode {
+	// the node has no parent -> there will be no uncle
+	// the node has no grandparent -> there will be no uncle
 	if node.parent == nil || node.parent.parent == nil {
 		return nil
 	}
+	// the grandparent left child is the parent of the node
 	if node.parent.parent.left == node.parent {
+		// the uncle is the right child of the grandparent
 		return node.parent.parent.right
 	}
+	// the grandparent left child is not the parent of the node therefore it must be the uncle
 	return node.parent.parent.left
 }
 

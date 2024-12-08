@@ -86,45 +86,39 @@ func (tree *RedBlackTree) Insert(value int) {
 }
 
 func (tree *RedBlackTree) transform(node *RedBlackNode) {
-	if node.parent.color == Black {
+	// if the node is also the root of the tree
+	if node == tree.Root {
+		// change the color to black and exit
+		node.color = Black
 		return
 	}
-	if node.parent.parent != nil && node.parent.color == Red && (node.uncle() == nil || node.uncle().color == Red) {
-		node.parent.color = Black
-		node.parent.parent.color = Red
-		if node.uncle() != nil {
+	// since the node is not the root of the tree, it has at least a parent
+	// if the node has a black parent...
+	if node.parent.color == Black {
+		// do nothing and exit
+		return
+	} else {
+		// the parent is red and so is the uncle ()
+		if node.uncle() != nil && node.uncle().color == Red {
+			// change color of parent and uncle to black
+			node.parent.color = Black
 			node.uncle().color = Black
-		}
-	}
-	grandparent := node.parent.parent
-	parent := node.parent
-	if (node.uncle() == nil || node.uncle().color == Black) && parent.color == Red {
-		if grandparent == tree.Root {
-			tree.Root = parent
-			parent.right = grandparent
-			parent.parent = nil
-			grandparent.parent = parent
-		}
-		if (parent.left == node && grandparent.left == parent) || (parent.right == node || parent == grandparent.right) {
-			parent.parent = grandparent.parent
-			grandparent.parent = parent
-			if parent.parent.right == grandparent {
-				parent.parent.right = parent
-				grandparent.right = parent.right
-				parent.right = nil
+			// and grandparent to red
+			node.parent.parent.color = Red
+			// and repeat the process for the grandparent
+			tree.transform(node.parent.parent)
+		} else {
+			// the uncle is black (OR NIl)
+			if node == node.parent.left && node.parent == node.parent.parent.left {
+				// node and parent are left children
+			} else if node == node.parent.right && node.parent == node.parent.parent.left {
+				// node is right child while parent is left child
+			} else if node == node.parent.right && node.parent == node.parent.parent.left {
+				// node and parent are right children
 			} else {
-				parent.parent.left = parent
-				grandparent.left = parent.left
-				parent.left = nil
+				// node is left child while parent is right child
 			}
 		}
-		parent.color = Black
-		grandparent.color = Red
-		return
-	}
-	if node.parent.color == Red && node.parent == tree.Root {
-		node.parent.color = Black
-		return
 	}
 }
 

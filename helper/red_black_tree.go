@@ -122,6 +122,62 @@ func (tree *RedBlackTree) transform(node *RedBlackNode) {
 	}
 }
 
+// Rotate the section of the tree around the node to the right
+func (tree *RedBlackTree) rotateRight(node *RedBlackNode) {
+	leftChild := node.left
+	// Change the left child to the left-right grandchild
+	node.left = leftChild.right
+	// if left-right grandchild exists ...
+	if leftChild.right != nil {
+		// ... fix the parent
+		leftChild.right.parent = node
+	}
+	// update the parent of the left child
+	leftChild.parent = node.parent
+	// if node is the current root of the tree change the root to the left child
+	if node.parent == nil {
+		tree.Root = leftChild
+	} else if node == node.parent.right {
+		// if node was the right child, change the right child of parent to left child of node
+		node.parent.right = leftChild
+	} else {
+		// else node was the left child of parent, so left child of node parent becomes left child of node
+		node.parent.left = leftChild
+	}
+	// change the right child of the left child to node...
+	leftChild.right = node
+	// ... and update the parent of node
+	node.parent = leftChild
+}
+
+// Rotate the section of the tree around the node to the left
+func (tree *RedBlackTree) rotateLeft(node *RedBlackNode) {
+	rightChild := node.right
+	// Change the right child to the right-left grandchild
+	node.right = rightChild.left
+	// if right-left grandchild exists ...
+	if rightChild.left != nil {
+		// ... fix the parent
+		rightChild.left.parent = node
+	}
+	// update the parent of the right child
+	rightChild.parent = node.parent
+	// if node is the current root of the tree change the root to the right child
+	if node.parent == nil {
+		tree.Root = rightChild
+	} else if node == node.parent.right {
+		// if node was the right child, change the right child of parent to right child of node
+		node.parent.right = rightChild
+	} else {
+		// else node was the left child of parent, so left child of node parent becomes right child of node
+		node.parent.left = rightChild
+	}
+	// change the right child of the left child to node...
+	rightChild.right = node
+	// ... and update the parent of node
+	node.parent = rightChild
+}
+
 func (node *RedBlackNode) Walk() []int {
 	result := make([]int, 0)
 	if node == nil {

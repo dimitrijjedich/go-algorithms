@@ -2,6 +2,9 @@ package algorithms
 
 func Search(needle []rune, haystack []rune) int {
 	n := len(needle)
+	if n == 0 {
+		return -1
+	}
 	maxLen := len(haystack)
 	skipTable := skipTable(needle)
 

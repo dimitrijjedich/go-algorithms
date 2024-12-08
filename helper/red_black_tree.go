@@ -153,8 +153,7 @@ func (tree *RedBlackTree) transform(node *RedBlackNode) {
 				// change color of node and previous grandparent (then sibling, now right child)
 				node.recolor()
 				node.right.recolor()
-
-			} else if node == node.parent.right && node.parent == node.parent.parent.left {
+			} else if node == node.parent.right && node.parent == node.parent.parent.right {
 				// node and parent are right children
 				// rotate left around grandparent
 				tree.rotateLeft(node.parent.parent)

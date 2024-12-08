@@ -13,9 +13,8 @@ func Search(needle []rune, haystack []rune) int {
 		if i == -1 {
 			return position + 1
 		}
-		_, exist := skipTable[haystack[position]]
-		if exist {
-			position = position + skipTable[haystack[position]]
+		if shift, exist := skipTable[haystack[position]]; exist {
+			position = position + shift
 		} else {
 			position = position + n
 		}

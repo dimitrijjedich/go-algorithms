@@ -7,7 +7,6 @@ func Search(needle []rune, hayStack []rune) int {
 
 	position := n - 1
 	for position < maxLen {
-		println("Current position", position)
 		i := n - 1
 		for ; i >= 0 && needle[i] == hayStack[position]; i, position = i-1, position-1 {
 		}

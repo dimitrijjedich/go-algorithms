@@ -81,6 +81,7 @@ func (tree *RedBlackTree) Insert(value int) {
 	// the new node is now child of pointer and needs to have it as parent
 	newNode.parent = pointer
 
+	// fix now potentially broken tree
 	tree.transform(newNode)
 }
 

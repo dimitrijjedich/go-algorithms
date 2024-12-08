@@ -45,6 +45,9 @@ func (node *RedBlackNode) sibling() *RedBlackNode {
 }
 
 func (node *RedBlackNode) recolor() {
+	if node == nil {
+		return
+	}
 	// if node is red ...
 	if node.color == Red {
 		// ... change color to black

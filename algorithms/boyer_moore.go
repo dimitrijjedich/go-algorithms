@@ -3,7 +3,7 @@ package algorithms
 func Search(needle []rune, haystack []rune) int {
 	n := len(needle)
 	maxLen := len(haystack)
-	skipTable := shiftArray(needle)
+	skipTable := skipTable(needle)
 
 	position := n - 1
 	for position < maxLen {
@@ -23,7 +23,7 @@ func Search(needle []rune, haystack []rune) int {
 	return -1
 }
 
-func shiftArray(needle []rune) map[rune]int {
+func skipTable(needle []rune) map[rune]int {
 	result := make(map[rune]int)
 	n := len(needle)
 	for i := n - 1; i >= 0; i-- {

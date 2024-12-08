@@ -50,46 +50,11 @@ func (tree *RedBlackTree) Insert(value int) {
 		}
 	}
 	newNode.parent = pointer
-	if newNode.parent.color == Black {
-		return
-	}
-	if newNode.parent.parent != nil && newNode.parent.color == Red && (newNode.uncle() == nil || newNode.uncle().color == Red) {
-		newNode.parent.color = Black
-		newNode.parent.parent.color = Red
-		if newNode.uncle() != nil {
-			newNode.uncle().color = Black
-		}
-	}
-	grandparent := newNode.parent.parent
-	parent := newNode.parent
-	if (newNode.uncle() == nil || newNode.uncle().color == Black) && parent.color == Red {
-		if grandparent == tree.Root {
-			tree.Root = parent
-			parent.right = grandparent
-			parent.parent = nil
-			grandparent.parent = parent
-		}
-		if (parent.left == newNode && grandparent.left == parent) || (parent.right == newNode || parent == grandparent.right) {
-			parent.parent = grandparent.parent
-			grandparent.parent = parent
-			if parent.parent.right == grandparent {
-				parent.parent.right = parent
-				grandparent.right = parent.right
-				parent.right = nil
-			} else {
-				parent.parent.left = parent
-				grandparent.left = parent.left
-				parent.left = nil
-			}
-		}
-		parent.color = Black
-		grandparent.color = Red
-		return
-	}
-	if newNode.parent.color == Red && newNode.parent == tree.Root {
-		newNode.parent.color = Black
-		return
-	}
+
+	tree.transform(newNode)
+}
+
+func (tree *RedBlackTree) transform(node *RedBlackNode) {
 }
 
 func (node *RedBlackNode) Walk() []int {

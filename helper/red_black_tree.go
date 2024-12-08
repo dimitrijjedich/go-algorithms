@@ -44,24 +44,36 @@ func (tree *RedBlackTree) Insert(value int) {
 		return
 	}
 
+	// starting point for the insert is the root of the tree
 	pointer := tree.Root
 	for {
+		// if the value of the new node is smaller than the one of the current -> left section of the tree
 		if newNode.value < pointer.value {
+			// if the is no left child (nil)
 			if pointer.left == nil {
+				// make the new node the left child of the current node
 				pointer.left = newNode
+				// end the insertion process
 				break
 			} else {
+				// if the left child exists, switch the pointer to it
 				pointer = pointer.left
 			}
 		} else {
+			// the value of the new node is greater or equal to the current -> right section of the tree
+			// if the is no right child (nil)
 			if pointer.right == nil {
+				// make the new node the right child of the current node
 				pointer.right = newNode
+				// end the insertion process
 				break
 			} else {
+				// if the left child exists, switch the pointer to it
 				pointer = pointer.right
 			}
 		}
 	}
+	// the new node is now child of pointer and needs to have it as parent
 	newNode.parent = pointer
 
 	tree.transform(newNode)

@@ -46,16 +46,20 @@ func (tree *RedBlackTree) Insert(value int) {
 
 	pointer := tree.Root
 	for {
-		if newNode.value < pointer.value && pointer.left != nil {
-			pointer = pointer.left
-		} else if newNode.value < pointer.value {
-			pointer.left = newNode
-			break
-		} else if pointer.right != nil {
-			pointer = pointer.right
+		if newNode.value < pointer.value {
+			if pointer.left == nil {
+				pointer.left = newNode
+				break
+			} else {
+				pointer = pointer.left
+			}
 		} else {
-			pointer.right = newNode
-			break
+			if pointer.right == nil {
+				pointer.right = newNode
+				break
+			} else {
+				pointer = pointer.right
+			}
 		}
 	}
 	newNode.parent = pointer

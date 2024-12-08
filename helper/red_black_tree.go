@@ -139,12 +139,37 @@ func (tree *RedBlackTree) transform(node *RedBlackNode) {
 			// the uncle is black (OR NIl)
 			if node == node.parent.left && node.parent == node.parent.parent.left {
 				// node and parent are left children
+				// rotate right around grandparent
+				tree.rotateRight(node.parent.parent)
+				// change color of parent and grandparent (now sibling)
+				node.parent.recolor()
+				node.sibling().recolor()
 			} else if node == node.parent.right && node.parent == node.parent.parent.left {
 				// node is right child while parent is left child
+				// rotate left around parent
+				tree.rotateLeft(node.parent)
+				// rotate right around previous grandparent (now parent)
+				tree.rotateRight(node.parent)
+				// change color of node and previous grandparent (then sibling, now right child)
+				node.recolor()
+				node.right.recolor()
+
 			} else if node == node.parent.right && node.parent == node.parent.parent.left {
 				// node and parent are right children
+				// rotate left around grandparent
+				tree.rotateLeft(node.parent.parent)
+				// change color of parent and previous grandparent (now sibling)
+				node.parent.recolor()
+				node.sibling().recolor()
 			} else {
 				// node is left child while parent is right child
+				// rotate right around parent
+				tree.rotateRight(node.parent)
+				// rotate left around grandparent (now parent)
+				tree.rotateLeft(node.parent)
+				// change color of node and previous grandparent (now left child)
+				node.recolor()
+				node.left.recolor()
 			}
 		}
 	}

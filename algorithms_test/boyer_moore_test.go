@@ -7,76 +7,88 @@ import (
 
 func TestSearch(t *testing.T) {
 	testCases := []struct {
-		name     string
-		needle   string
-		haystack string
-		expected int
+		name           string
+		needle         string
+		haystack       string
+		expectedResult int
+		expectedError  string
 	}{
 		{
-			name:     "Exact Match",
-			needle:   "abc",
-			haystack: "abc",
-			expected: 0,
+			name:           "Exact Match",
+			needle:         "abc",
+			haystack:       "abc",
+			expectedResult: 0,
+			expectedError:  "",
 		},
 		{
-			name:     "Match at Start",
-			needle:   "abc",
-			haystack: "abcdef",
-			expected: 0,
+			name:           "Match at Start",
+			needle:         "abc",
+			haystack:       "abcdef",
+			expectedResult: 0,
+			expectedError:  "",
 		},
 		{
-			name:     "Match in Middle",
-			needle:   "def",
-			haystack: "abcdefghi",
-			expected: 3,
+			name:           "Match in Middle",
+			needle:         "def",
+			haystack:       "abcdefghi",
+			expectedResult: 3,
+			expectedError:  "",
 		},
 		{
-			name:     "Match at End",
-			needle:   "ghi",
-			haystack: "abcdefghi",
-			expected: 6,
+			name:           "Match at End",
+			needle:         "ghi",
+			haystack:       "abcdefghi",
+			expectedResult: 6,
+			expectedError:  "",
 		},
 		{
-			name:     "No Match",
-			needle:   "xyz",
-			haystack: "abcdefghi",
-			expected: -1,
+			name:           "No Match",
+			needle:         "xyz",
+			haystack:       "abcdefghi",
+			expectedResult: -1,
+			expectedError:  "needle not found",
 		},
 		{
-			name:     "Empty Needle",
-			needle:   "",
-			haystack: "abcdefghi",
-			expected: -1,
+			name:           "Empty Needle",
+			needle:         "",
+			haystack:       "abcdefghi",
+			expectedResult: -1,
+			expectedError:  "needle can not be empty",
 		},
 		{
-			name:     "Empty Haystack",
-			needle:   "abc",
-			haystack: "",
-			expected: -1,
+			name:           "Empty Haystack",
+			needle:         "abc",
+			haystack:       "",
+			expectedResult: -1,
+			expectedError:  "needle not found",
 		},
 		{
-			name:     "Needle Longer Than Haystack",
-			needle:   "abcdefgh",
-			haystack: "abc",
-			expected: -1,
+			name:           "Needle Longer Than Haystack",
+			needle:         "abcdefgh",
+			haystack:       "abc",
+			expectedResult: -1,
+			expectedError:  "needle not found",
 		},
 		{
-			name:     "Overlapping Matches",
-			needle:   "aba",
-			haystack: "abababa",
-			expected: 0,
+			name:           "Overlapping Matches",
+			needle:         "aba",
+			haystack:       "abababa",
+			expectedResult: 0,
+			expectedError:  "",
 		},
 		{
-			name:     "Single Character Match",
-			needle:   "a",
-			haystack: "abcdef",
-			expected: 0,
+			name:           "Single Character Match",
+			needle:         "a",
+			haystack:       "abcdef",
+			expectedResult: 0,
+			expectedError:  "",
 		},
 		{
-			name:     "Single Character No Match",
-			needle:   "z",
-			haystack: "abcdef",
-			expected: -1,
+			name:           "Single Character No Match",
+			needle:         "z",
+			haystack:       "abcdef",
+			expectedResult: -1,
+			expectedError:  "needle not found",
 		},
 	}
 

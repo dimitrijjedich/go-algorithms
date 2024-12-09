@@ -94,9 +94,15 @@ func TestSearch(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
-			result := algorithms.Search([]rune(testCase.needle), []rune(testCase.haystack))
-			if result != testCase.expected {
-				t.Errorf("Search(%q, %q) = %d; want %d", testCase.needle, testCase.haystack, result, testCase.expected)
+			result, errorMessage := algorithms.Search([]rune(testCase.needle), []rune(testCase.haystack))
+			if result != testCase.expectedResult {
+				t.Errorf("Search(%q, %q) = result %d; want %d", testCase.needle, testCase.haystack, result, testCase.expectedResult)
+			}
+			if errorMessage == nil && testCase.expectedError != "" {
+				t.Errorf("Search(%q, %q) = error(%v); want nil", testCase.needle, testCase.haystack, errorMessage.Error())
+			}
+			if (errorMessage != nil) && (errorMessage.Error() != testCase.expectedError) {
+				t.Errorf("Search(%q, %q) = error(%v); want %v", testCase.needle, testCase.haystack, errorMessage, testCase.expectedError)
 			}
 		})
 	}

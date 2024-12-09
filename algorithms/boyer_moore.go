@@ -1,9 +1,11 @@
 package algorithms
 
-func Search(needle []rune, haystack []rune) int {
+import "errors"
+
+func Search(needle []rune, haystack []rune) (int, error) {
 	n := len(needle)
 	if n == 0 {
-		return -1
+		return -1, errors.New("needle can not be empty")
 	}
 	maxLen := len(haystack)
 	skipTable := skipTable(needle)
@@ -14,7 +16,7 @@ func Search(needle []rune, haystack []rune) int {
 		for ; i >= 0 && needle[i] == haystack[position]; i, position = i-1, position-1 {
 		}
 		if i == -1 {
-			return position + 1
+			return position + 1, nil
 		}
 		if shift, exist := skipTable[haystack[position]]; exist {
 			position = position + shift
@@ -22,7 +24,7 @@ func Search(needle []rune, haystack []rune) int {
 			position = position + n
 		}
 	}
-	return -1
+	return -1, errors.New("needle not found")
 }
 
 func skipTable(needle []rune) map[rune]int {

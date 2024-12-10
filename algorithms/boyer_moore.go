@@ -8,6 +8,12 @@ func Search(needle []rune, haystack []rune) (int, error) {
 		return -1, errors.New("needle can not be empty")
 	}
 	maxLen := len(haystack)
+	if maxLen == 0 {
+		return -1, errors.New("haystack can not be empty")
+	}
+	if maxLen < n {
+		return -1, errors.New("haystack can not be longer than needle")
+	}
 	skipTable := skipTable(needle)
 
 	position := n - 1

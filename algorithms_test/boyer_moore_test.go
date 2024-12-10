@@ -60,14 +60,14 @@ func TestSearch(t *testing.T) {
 			needle:         "abc",
 			haystack:       "",
 			expectedResult: -1,
-			expectedError:  "needle not found",
+			expectedError:  "haystack can not be empty",
 		},
 		{
 			name:           "Needle Longer Than Haystack",
 			needle:         "abcdefgh",
 			haystack:       "abc",
 			expectedResult: -1,
-			expectedError:  "needle not found",
+			expectedError:  "haystack can not be longer than needle",
 		},
 		{
 			name:           "Overlapping Matches",
